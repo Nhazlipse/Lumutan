@@ -20,7 +20,7 @@ jobs:
       - name: Commit changes
         run: |
           set -o pipefail
-          git config --global --add safe.directory /github/workspace
+          git config --global --add safe.directory '*'
           git config --local user.email "nhazlipse@gmail.com"
           git config --local user.name "Nhazlipse"
           git add -A
