@@ -13,7 +13,7 @@ jobs:
   auto_commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3      
+      - uses: actions/checkout@v2      
         with:
          persist-credentials: false
          fetch-depth: 0
@@ -25,8 +25,11 @@ jobs:
           
       - name: Commit changes
         run: |
+          set -o pipefail
+          git config --global --add safe.directory /github/workspace
           git config --local user.email "nhazlipse@gmail.com"
           git config --local user.name "Nhazlipse"
+          git config --global --add safe.directory /github/workspace
           git add -A
           
           arr[0]="chore(bot): 😂 auto commit"
@@ -47,5 +50,6 @@ jobs:
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
         with:
+          force: true
           directory: "."
           github_token: ${{ secrets.GITHUB_TOKEN }}
