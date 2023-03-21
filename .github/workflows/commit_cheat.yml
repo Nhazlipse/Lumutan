@@ -19,12 +19,12 @@ jobs:
           echo $d > LAST_UPDATED
       - name: Commit changes
         run: |
-          git config --local user.email "{YOUR_EMAIL}"
-          git config --local user.name "{YOUR_USERNAME}"
+          git config --local user.email "nhazlipse@gmail.com"
+          git config --local user.name "nhazlipse"
           git add -A
           git commit -m "Sebuah pesan"
       - name: Push Back
-        uses: ad-m/github-push-action@v0.5.0
+        uses: ad-m/github-push-action@master
         with:
           force: true
           directory: '.'
