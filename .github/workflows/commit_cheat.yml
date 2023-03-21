@@ -23,7 +23,7 @@ jobs:
           git config --local user.name "nhazlipse"
           git add -A
           git commit -m "Sebuah pesan"
-      - name: Push Back
+      - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
           force: true
