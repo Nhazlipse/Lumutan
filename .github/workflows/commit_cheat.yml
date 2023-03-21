@@ -19,8 +19,8 @@ jobs:
           echo $d > LAST_UPDATED
       - name: Commit changes
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git config --local user.email "nhazlipse@gmail.com"
+          git config --local user.name "nhazlipse"
           git commit -a -m "Auto Commit"
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
