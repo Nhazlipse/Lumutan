@@ -1,13 +1,27 @@
-name: Auto commit
+name: Commit Now
 
 on:
-
+  workflow_dispatch:
+    inputs:
+      email:
+        description: 'EMail'
+        required: true
+        default: 'nhazlipse@gmail.com'
+      username:
+        description: 'Username'
+        required: true
+        default: 'nhazlipse'
+      commit:
+        description: 'Commit'
+        required: true
+        default: 'Lumutan'
+      limit:
+        description: 'Limit Commit'
+        required: true
+        default: 20
   push:
     branches:
       - master
-      
-  schedule:
-  - cron: "0 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 * * *" # See https://crontab.guru/#0_7,9,11,17,20_*_*_*
 
 jobs:
   auto_commit:
@@ -17,19 +31,11 @@ jobs:
         with:
          persist-credentials: false
          fetch-depth: 0
-
-      - name: Modify last update
+      
+      - name: Set Config
         run: |
-          d=`date '+%Y-%m-%dT%H:%M:%SZ'`
-          echo $d > LAST_UPDATED
-          
-      - name: Commit changes
-        run: |
-          set -o pipefail
-          git config --global --add safe.directory /github/workspace
-          git config --local user.email "nhazlipse@gmail.com"
-          git config --local user.name "nhazlipse"
-          git config --global --add safe.directory /github/workspace
+          git config --local user.email "${{ github.event.inputs.email }}"
+          git config --local user.name "${{ github.event.inputs.username }}"
           git add -A
           
           arr[0]="chore(bot): 😂 auto commit"
@@ -46,6 +52,17 @@ jobs:
           rand=$[$RANDOM % ${#arr[@]}]
           
           git commit -m "${arr[$rand]}"
+
+      - name: DO It
+        run: |
+          for i in {0..${{ github.event.inputs.limit }}}
+          do
+            cat > LAST_UPDATED
+            d=$i+`date '+%Y-%m-%dT%H:%M:%SZ'`
+            echo $d > LAST_UPDATED
+            git add -A
+            git commit -m "${{ github.event.inputs.commit }}"
+          done
           
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
