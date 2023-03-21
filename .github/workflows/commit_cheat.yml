@@ -24,7 +24,7 @@ jobs:
           git add -A
           git commit -m "Sebuah pesan"
       - name: Push Back
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v0.6.0
         with:
           force: true
           directory: '.'
