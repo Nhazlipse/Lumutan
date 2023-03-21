@@ -19,6 +19,7 @@ jobs:
           echo $d > LAST_UPDATED
       - name: Commit changes
         run: |
+          git config --global --add safe.directory /github/workspace
           git config --local user.email "nhazlipse@gmail.com"
           git config --local user.name "Nhazlipse"
           git add -A
