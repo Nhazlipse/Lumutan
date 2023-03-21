@@ -23,3 +23,9 @@ jobs:
           git config --local user.name "{YOUR_USERNAME}"
           git add -A
           git commit -m "Sebuah pesan"
+      - name: Push Back
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          force: true
+          directory: '.'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
